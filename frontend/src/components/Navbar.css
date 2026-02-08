@@ -1,0 +1,22 @@
+.navbar {
+  height: 48px;
+  background: #0b0b0b;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  width: 26px;
+  height: 26px;
+}
+
+.navbar-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #38bdf8;
+}

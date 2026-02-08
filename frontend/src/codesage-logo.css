@@ -1,0 +1,71 @@
+.codesage-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.codesage-svg {
+  width: 360px;
+  overflow: visible;
+}
+
+.word-code {
+  font-size: 56px;
+  font-weight: 700;
+  fill: white;
+  letter-spacing: 2px;
+  animation: codePop 0.9s ease forwards;
+}
+
+.word-sage .pixel {
+  fill: #38bdf8;
+  opacity: 0;
+  transform-origin: center;
+  animation: pixelIn 0.6s ease forwards;
+}
+
+.word-sage .pixel:nth-child(n) {
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+.codesage-svg .pixel {
+  animation-delay: calc(var(--i) * 30ms);
+}
+
+.codesage-text {
+  font-size: 32px;
+  letter-spacing: 3px;
+}
+
+/* Animations */
+
+@keyframes codePop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pixelIn {
+  from {
+    transform: translateY(20px) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Hover explode effect */
+.codesage-brand:hover .pixel {
+  transform: translate(
+    calc(-20px + 40px * random()),
+    calc(-20px + 40px * random())
+  );
+}

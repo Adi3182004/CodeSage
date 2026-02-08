@@ -1,0 +1,468 @@
+/* ================== GLOBAL RESET ================== */
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: #0e0e0e;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* ================== APP LAYOUT ================== */
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================== TOP NAVBAR ================== */
+
+.topbar {
+  height: 48px;
+  background: #0b0b0b;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.topbar-logo {
+  width: 22px;
+  height: 22px;
+}
+
+.topbar-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #38bdf8;
+}
+
+/* ================== MAIN GRID (SIDEBAR + EDITOR) ================== */
+
+.main-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  height: calc(100vh - 48px);
+}
+
+/* ================== SIDEBAR ================== */
+
+.sidebar {
+  width: 90px;
+  min-width: 90px;
+  flex-shrink: 0;
+
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 16px;
+  gap: 12px;
+  border-right: 1px solid #222;
+}
+
+.action {
+  width: 70px;
+  padding: 8px;
+  font-size: 12px;
+  background: #1a1a1a;
+  color: #9ca3af;
+  border: 1px solid #222;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.action:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.action:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.action.run {
+  margin-top: auto;
+  margin-bottom: 16px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+}
+
+.action.run:hover {
+  background: #1d4ed8;
+}
+
+/* ================== EDITOR AREA ================== */
+
+.editor-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ================== TERMINAL ================== */
+
+.terminal {
+  height: 35%;
+  background: #000;
+  border-top: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: #111;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.terminal-close {
+  background: transparent;
+  color: #e5e7eb;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 10px;
+  font-size: 12px;
+  color: #22c55e;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* ================== SPLASH (OVERLAY ONLY) ================== */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+
+  background: radial-gradient(circle at center, #0b0f1a, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: splashFade 0.6s ease forwards;
+  animation-delay: 1.8s;
+}
+
+@keyframes splashFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ================== DIFF MODAL ================== */
+
+.diff-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.diff-container {
+  width: 92%;
+  max-width: 1200px;
+  background: #0b0b0b;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== Summary Banner ===== */
+
+.diff-summary {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.diff-summary.good {
+  background: #052e16;
+  color: #6ee7b7;
+  border: 1px solid #14532d;
+}
+
+.diff-summary.neutral {
+  background: #111827;
+  color: #9ca3af;
+  border: 1px solid #1f2937;
+}
+
+/* ===== Header ===== */
+
+.diff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.diff-header h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.diff-header span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* ===== Panels ===== */
+
+.diff-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.diff-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diff-label {
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.diff-panel textarea {
+  height: 360px;
+  resize: none;
+  background: #000;
+  color: #e5e7eb;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Improved side emphasis */
+.diff-panel.improved textarea {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+/* ===== Line Highlighting (AST / Diff) ===== */
+
+.line-added {
+  background: rgba(34, 197, 94, 0.18);
+  color: #6ee7b7;
+}
+
+.line-removed {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+}
+
+/* ===== Actions ===== */
+
+.diff-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.diff-actions button {
+  padding: 7px 16px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.diff-actions .apply {
+  background: #22c55e;
+  color: #052e16;
+}
+
+.diff-actions .apply:hover {
+  background: #16a34a;
+}
+
+.diff-actions .apply:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.diff-actions .cancel {
+  background: #1f2937;
+  color: #e5e7eb;
+}
+
+.diff-actions .cancel:hover {
+  background: #374151;
+}
+
+.suggestion-glyph {
+  background: url("data:image/svg+xml;base64,...") no-repeat center;
+}
+
+/* ===== FORCE SINGLE TOP NAVBAR LAYOUT ===== */
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR HEIGHT LOCK */
+.navbar {
+  height: 48px;
+  min-height: 48px;
+  flex-shrink: 0;
+  background: #0b0b0b;
+  border-bottom: 1px solid #222;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 10px;
+}
+
+/* MAIN CONTENT BELOW NAVBAR */
+.main-layout {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 90px;
+  background: #111;
+  border-right: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  gap: 12px;
+}
+
+/* EDITOR */
+.editor-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* =====================================================
+   DIFF CODE VISUAL CLARITY FIX (FINAL)
+   ===================================================== */
+
+/* --- Code blocks inside diff --- */
+.diff-panel pre {
+  background: #000;
+  color: #e5e7eb; /* ORIGINAL = white */
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* --- Improved code block --- */
+.diff-panel.improved pre {
+  color: #22c55e; /* Green text */
+  border-color: #22c55e;
+  background: #020f08;
+}
+
+/* --- Line-level highlights (used by future diff logic) --- */
+.line-added {
+  background: rgba(46, 204, 113, 0.18); /* sea-green */
+  color: #6ee7b7;
+  display: block;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+
+.line-removed {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+  display: block;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+
+/* --- Summary banner alignment --- */
+.diff-summary {
+  text-align: center;
+}
+
+/* --- Selection cleanup (NO blue mess) --- */
+.diff-panel pre::selection {
+  background: rgba(56, 189, 248, 0.25);
+}
+
+/* --- Disable apply button clearly when no change --- */
+.diff-actions .apply:disabled {
+  background: #064e3b;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* --- Ensure modal content is NOT translucent --- */
+.diff-container {
+  background: #0b0b0b;
+  opacity: 1;
+}
+
+/* --- Remove any inherited opacity issues --- */
+.diff-modal * {
+  opacity: 1;
+}
