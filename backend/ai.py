@@ -91,7 +91,7 @@ average = total / len(numbers)
 print(average)
 """
         return {
-            "summary": "✅ Safe Improvement Detected • Replaced manual loop with sum() • Renamed variables for clarity • Output logic unchanged",
+            "summary": "Replaced manual loop with built-in sum()",
             "improved_code": forced
         }
 
